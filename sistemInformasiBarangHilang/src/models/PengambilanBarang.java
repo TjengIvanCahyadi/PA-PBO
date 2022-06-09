@@ -4,15 +4,15 @@ public class PengambilanBarang {
     // PROPERTY
     private String idPengambilanBarang;
     private String tanggalPengambilanBarang;
-    private Barang barang;
-    private CivitasAkademik pengambil;
+    private String idBarang;
+    private String idPengambil;
     
     // CONSTRUCTOR
-    public PengambilanBarang(String idPengambilanBarang, String tanggalPengambilanBarang, Barang barang, CivitasAkademik pengambil){
+    public PengambilanBarang(String idPengambilanBarang, String tanggalPengambilanBarang, String idBarang, String idPengambil){
         this.idPengambilanBarang = idPengambilanBarang;
         this.tanggalPengambilanBarang = tanggalPengambilanBarang;
-        this.barang = barang;
-        this.pengambil = pengambil;
+        this.idBarang = idBarang;
+        this.idPengambil = idPengambil;
     }
     
     // GETTER
@@ -24,12 +24,12 @@ public class PengambilanBarang {
         return tanggalPengambilanBarang;
     }
 
-    public Barang getBarang() {
-        return barang;
+    public String getIdBarang() {
+        return idBarang;
     }
 
-    public CivitasAkademik getPengambil() {
-        return pengambil;
+    public String getIdPengambil() {
+        return idPengambil;
     }
 
     // SETTER
@@ -41,13 +41,11 @@ public class PengambilanBarang {
         this.tanggalPengambilanBarang = tanggalPengambilanBarang;
     }
 
-    public void setBarang(Barang barang) {
-        this.barang = barang;
+    public void setIdBarang(String idBarang) {
+        this.idBarang = idBarang;
     }
 
-    public void setPengambil(CivitasAkademik pengambil) {
-        this.pengambil = pengambil;
+    public void setIdPengambil(String idPengambil) {
+        this.idPengambil = idPengambil;
     }
-    
-    
 }

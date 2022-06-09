@@ -3,13 +3,13 @@ package models;
 public class BarangHilang extends Barang{
     // PROPERTY
     private String tanggalHilang;
-    private String namaPemilik; // APAKAH INI LEBIH BAIK DIUBAH MENJADI ID PEMILIK?
+    private String idPemilik;
 
     // CONSTRUCTOR
-    public BarangHilang(String idBarang, String namaBarang, String jenisBarang, String warnaBarang, String lokasiBarang, String tanggalHilang, String namaPemilik) {
+    public BarangHilang(String idBarang, String namaBarang, String jenisBarang, String warnaBarang, String lokasiBarang, String tanggalHilang, String idPemilik) {
         super(idBarang, namaBarang, jenisBarang, warnaBarang, lokasiBarang);
         this.tanggalHilang = tanggalHilang;
-        this.namaPemilik = namaPemilik;
+        this.idPemilik = idPemilik;
     }
 
     // GETTER
@@ -17,8 +17,8 @@ public class BarangHilang extends Barang{
         return tanggalHilang;
     }
 
-    public String getNamaPemilik() {
-        return namaPemilik;
+    public String getIdPemilik() {
+        return idPemilik;
     }
 
     // SETTER
@@ -26,8 +26,8 @@ public class BarangHilang extends Barang{
         this.tanggalHilang = tanggalHilang;
     }
 
-    public void setNamaPemilik(String namaPemilik) {
-        this.namaPemilik = namaPemilik;
+    public void setIdPemilik(String idPemilik) {
+        this.idPemilik = idPemilik;
     }
     
 }

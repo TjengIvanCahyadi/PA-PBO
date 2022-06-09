@@ -1,8 +1,14 @@
 package models;
 
+import sisteminformasibaranghilang.Main;
+import static sisteminformasibaranghilang.Main.kumpulanAdmin;
 import static sisteminformasibaranghilang.Main.kumpulanBarangHilang;
 import static sisteminformasibaranghilang.Main.kumpulanBarangTemu;
 import static sisteminformasibaranghilang.Main.kumpulanCivitasAkademik;
+import static sisteminformasibaranghilang.Main.kumpulanPetugas;
+import static sisteminformasibaranghilang.Main.tempAdmin;
+import static sisteminformasibaranghilang.Main.tempCivak;
+import static sisteminformasibaranghilang.Main.tempPetugas;
 
 public class User {
     // PROPERTY
@@ -69,45 +75,50 @@ public class User {
         this.passwordPengguna = passwordPengguna;
     }
     
-    // UNTUK VERIFIKASI LOGIN USER
-    public boolean loginVerification(String usernamePengguna, String passwordPengguna){
-        return this.usernamePengguna.equals(usernamePengguna) && this.passwordPengguna.equals(passwordPengguna);
-    }
-    
     // YANG BISA DILAKUKAN USER
-    public void tampilCivitasAkademik() {
-        System.out.println("DATA CIVITAS AKADEMIK");
-        System.out.println("");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.printf("%-5s%-50s%-50s%-15s%-20s%-20s%s\n", "No", "Nama", "Email", "Nomor Telepon", "Username", "Password", "Peran");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        for (int i = 0; i < kumpulanCivitasAkademik.size(); i++){
-            System.out.printf("%-5s%-50s%-50s%-15s%-20s%-20s%s\n", String.valueOf(i + 1), kumpulanCivitasAkademik.get(i).getNamaPengguna(), kumpulanCivitasAkademik.get(i).getEmailPengguna(), kumpulanCivitasAkademik.get(i).getNomorTeleponPengguna(), kumpulanCivitasAkademik.get(i).getUsernamePengguna(), kumpulanCivitasAkademik.get(i).getPasswordPengguna(), kumpulanCivitasAkademik.get(i).getPeranCivitasAkademik());
+    public static boolean login(String usernamePengguna, String passwordPengguna) {
+        for (Admin admin : kumpulanAdmin) {
+            if (admin.getUsernamePengguna().equals(usernamePengguna) && admin.getPasswordPengguna().equals(passwordPengguna)) {
+                tempAdmin = admin;
+                return true;
+            }
         }
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+        for (Petugas petugas : kumpulanPetugas) {
+            if (petugas.getUsernamePengguna().equals(usernamePengguna) && petugas.getPasswordPengguna().equals(passwordPengguna)) {
+                tempPetugas = petugas;
+                return true;
+            }
+        }
+        for (CivitasAkademik civitasAkademik : kumpulanCivitasAkademik) {
+            if (civitasAkademik.getUsernamePengguna().equals(usernamePengguna) && civitasAkademik.getPasswordPengguna().equals(passwordPengguna)) {
+                tempCivak = civitasAkademik;
+                return true;
+            }
+        }
+        return false;
     }
-    
+
     public void tampilBarangHilang() {
         System.out.println("DATA BARANG HILANG");
         System.out.println("");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.printf("%-5s%-20s%-20s%-20s%-30s%s\n", "No", "Nama", "Jenis", "Warna", "Lokasi Hilang", "Tanggal Hilang");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.printf("%-5s%-20s%-20s%-20s%-30s%-20s%s\n", "No", "Nama", "Jenis", "Warna", "Lokasi Hilang", "Tanggal Hilang", "Pemilik");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         for (int i = 0; i < kumpulanBarangHilang.size(); i++){
-            System.out.printf("%-5s%-20s%-20s%-20s%-30s%s\n", String.valueOf(i + 1), kumpulanBarangHilang.get(i).getNamaBarang(), kumpulanBarangHilang.get(i).getJenisBarang(), kumpulanBarangHilang.get(i).getWarnaBarang(), kumpulanBarangHilang.get(i).getLokasiBarang(), kumpulanBarangHilang.get(i).getTanggalHilang());
+            System.out.printf("%-5s%-20s%-20s%-20s%-30s%-20s%s\n", String.valueOf(i + 1), kumpulanBarangHilang.get(i).getNamaBarang(), kumpulanBarangHilang.get(i).getJenisBarang(), kumpulanBarangHilang.get(i).getWarnaBarang(), kumpulanBarangHilang.get(i).getLokasiBarang(), kumpulanBarangHilang.get(i).getTanggalHilang(), Main.getNamaPemilikDariIdPemilik(kumpulanBarangHilang.get(i).getIdPemilik()));
         }
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
     }
     
     public void tampilBarangTemu() {
         System.out.println("DATA BARANG TEMU");
         System.out.println("");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        System.out.printf("%-5s%-20s%-20s%-20s%-30s%s\n", "No", "Nama", "Jenis", "Warna", "Lokasi Temu", "Tanggal Temu");
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.printf("%-5s%-20s%-20s%-20s%-30s%-20s%s\n", "No", "Nama", "Jenis", "Warna", "Lokasi Temu", "Tanggal Temu", "Penemu");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         for (int i = 0; i < kumpulanBarangTemu.size(); i++){
-            System.out.printf("%-5s%-20s%-20s%-20s%-30s%s\n", String.valueOf(i + 1), kumpulanBarangTemu.get(i).getNamaBarang(), kumpulanBarangTemu.get(i).getJenisBarang(), kumpulanBarangTemu.get(i).getWarnaBarang(), kumpulanBarangTemu.get(i).getLokasiBarang(), kumpulanBarangTemu.get(i).getTanggalTemu());
+            System.out.printf("%-5s%-20s%-20s%-20s%-30s%-20s%s\n", String.valueOf(i + 1), kumpulanBarangTemu.get(i).getNamaBarang(), kumpulanBarangTemu.get(i).getJenisBarang(), kumpulanBarangTemu.get(i).getWarnaBarang(), kumpulanBarangTemu.get(i).getLokasiBarang(), kumpulanBarangTemu.get(i).getTanggalTemu(), Main.getNamaPenemuDariIdPenemu(kumpulanBarangTemu.get(i).getIdPenemu()));
         }
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
     }
 }
